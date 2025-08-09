@@ -1,6 +1,8 @@
-# Django AuthSystem - Role-Based Authentication
+# Django AuthSystem - Role-Based Authentication & Medical Blog
 
-A complete Django authentication system with role-based user management supporting **Patient** and **Doctor** user types. Built with Django 5.2.4 and SQLite3, featuring a clean interface using raw HTML and CSS.
+A complete Django authentication system with **Patient** and **Doctor** user roles, extended with a medical blog platform where doctors can create categorized blog posts (with draft feature) and patients can browse published posts.
+
+Built with Django 5.2.4, MySQL, and a JavaScript frontend of your choice.
 
 ## 🚀 Features
 
@@ -10,6 +12,10 @@ A complete Django authentication system with role-based user management supporti
 - **Flexible Login**: Support for both username and email authentication
 - **Role-Based Dashboards**: Separate interfaces for patients and doctors
 - **Profile Pictures**: Image upload with proper handling
+- **Medical Blog System**:  
+  - Doctors create posts with title, image, category, summary, content  
+  - Draft or publish blog posts  
+  - Patients view published posts by category with truncated summaries (15 words)  
 
 ### Authentication Features
 - ✅ User registration with validation
@@ -21,17 +27,18 @@ A complete Django authentication system with role-based user management supporti
 
 ### Technical Features
 - ✅ Custom User model extending AbstractUser
-- ✅ SQLite3 database
+- ✅ MYSQL server
 - ✅ Media file handling for uploads
 - ✅ Responsive design with raw HTML/CSS
 - ✅ Form validation and error handling
 
-## 📋 Requirements
+## Requirements
 
-- Python 3.8+
-- Django 5.2.4
-- Pillow (for image handling)
-
+- Python 3.8+  
+- Django 5.2.4  
+- MySQL Server  
+- Pillow (for image handling)  
+- JavaScript framework/library 
 ## 🛠️ Local Setup
 
 ### 1. Clone the Repository
@@ -73,28 +80,39 @@ Visit `http://127.0.0.1:8000` to access the application.
 
 ```
 AuthSystem/
-├── manage.py
-├── requirements.txt
-├── .gitignore
-├── README.md
-├── accounts/
-│   ├── models.py          # Custom User model
-│   ├── views.py           # Authentication views
-│   ├── forms.py           # Registration and login forms
-│   ├── urls.py            # URL routing
-│   ├── templates/         # HTML templates
-│   │   ├── signup.html
-│   │   ├── login.html
-│   │   ├── patient_dashboard.html
-│   │   └── doctor_dashboard.html
-│   └── static/css/
-│       └── style.css      # Raw CSS styling
-├── AuthSystem/
-│   ├── settings.py        # Django settings
-│   ├── urls.py            # Main URL configuration
-│   └── wsgi.py
-└── media/                 # User uploaded files
-    └── profiles/
+├── AuthSystem/              # Django project settings and configuration
+│   ├── __init__.py
+│   ├── asgi.py              # ASGI application entry point
+│   ├── settings.py          # Project settings file
+│   ├── urls.py              # Root URL configurations
+│   └── wsgi.py              # WSGI application entry point
+├── README.md                # Project documentation
+├── accounts/                # User authentication and profile management
+│   ├── __init__.py
+│   ├── admin.py             # Admin site configs for accounts
+│   ├── apps.py              # App config
+│   ├── forms.py             # Forms for signup/login etc.
+│   ├── migrations/          # Database migrations
+│   ├── models.py            # Custom User models
+│   ├── static/              # Static files (CSS, JS, images)
+│   ├── templates/           # HTML templates for accounts app
+│   ├── tests.py             # Unit tests
+│   ├── urls.py              # URLs routing for accounts app
+│   └── views.py             # View functions for accounts
+├── blog/                    # Medical blog app for doctor and patient posts
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── migrations/          # Database migrations
+│   ├── models.py            # Blog post models with categories and draft
+│   ├── tests.py             # Blog app tests
+│   └── views.py             # Views for blog functionality
+├── manage.py                # Django management script
+├── media/                   # Uploaded media files
+│   └── blog_images/         # Images uploaded in blog posts
+└── requirements.txt         # Python dependencies
+
+
 ```
 
 ## 🎯 Usage
@@ -148,12 +166,15 @@ Doctor-focused interface with medical portal features.
 - Appointment scheduling access
 - Medical record viewing
 - Communication with healthcare providers
+-browse published posts by category
+
 
 ### Doctor
 - Patient management capabilities
 - Medical record access and updates
 - Prescription management
 - Patient communication tools
+-create/edit blog posts with draft option and categories
 
 ## 🔧 Customization
 
